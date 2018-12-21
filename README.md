@@ -21,6 +21,8 @@ InterNations coding challenge for Backend Developer position.
 6. Run `openssl genrsa -out config/jwt/private.pem 4096`
 7. Run `openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem`
 
-##### Tools Used
-
 ##### API Documentation
+Admin Username: `admin`
+Admin Password: `secret123`
+
+[Postman Documentation](https://documenter.getpostman.com/view/188228/RzfniRMK)
