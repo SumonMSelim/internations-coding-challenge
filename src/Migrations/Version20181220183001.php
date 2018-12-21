@@ -17,7 +17,7 @@ final class Version20181220183001 extends AbstractMigration
         } catch (AbortMigrationException $e) {
         }
 
-        $this->addSql('CREATE TABLE `user` (`id` INT AUTO_INCREMENT NOT NULL, `username` VARCHAR(64) NOT NULL, `roles` JSON NOT NULL, `password` VARCHAR(128) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (`username`), PRIMARY KEY(`id`)) DEFAULT CHARACTER SET `utf8mb4` COLLATE `utf8mb4_unicode_ci` ENGINE = `InnoDB`');
+        $this->addSql('CREATE TABLE `users` (`id` INT AUTO_INCREMENT NOT NULL, `username` VARCHAR(64) NOT NULL, `roles` JSON NOT NULL, `password` VARCHAR(128) NOT NULL, UNIQUE INDEX UNIQ_8D93D649F85E0677 (`username`), PRIMARY KEY(`id`)) DEFAULT CHARACTER SET `utf8mb4` COLLATE `utf8mb4_unicode_ci` ENGINE = `InnoDB`');
     }
 
     public function down(Schema $schema): void
@@ -28,6 +28,6 @@ final class Version20181220183001 extends AbstractMigration
         } catch (AbortMigrationException $e) {
         }
 
-        $this->addSql('DROP TABLE `user`');
+        $this->addSql('DROP TABLE `users`');
     }
 }

@@ -20,7 +20,7 @@ final class Version20181220183656 extends AbstractMigration
         } catch (AbortMigrationException $e) {
         }
 
-        $this->addSql('CREATE TABLE `group` (`id` INT AUTO_INCREMENT NOT NULL, `name` VARCHAR(64) NOT NULL, `created_at` DATETIME NOT NULL, UNIQUE INDEX UNIQ_6DC044C55E237E06 (`name`), PRIMARY KEY(`id`)) DEFAULT CHARACTER SET `utf8mb4` COLLATE `utf8mb4_unicode_ci` ENGINE = `InnoDB`');
+        $this->addSql('CREATE TABLE `groups` (`id` INT AUTO_INCREMENT NOT NULL, `name` VARCHAR(64) NOT NULL, `created_at` DATETIME NOT NULL, UNIQUE INDEX UNIQ_6DC044C55E237E06 (`name`), PRIMARY KEY(`id`)) DEFAULT CHARACTER SET `utf8mb4` COLLATE `utf8mb4_unicode_ci` ENGINE = `InnoDB`');
     }
 
     public function down(Schema $schema): void
@@ -31,6 +31,6 @@ final class Version20181220183656 extends AbstractMigration
         } catch (AbortMigrationException $e) {
         }
 
-        $this->addSql('DROP TABLE `group`');
+        $this->addSql('DROP TABLE `groups`');
     }
 }
