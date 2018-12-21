@@ -5,6 +5,7 @@ namespace App\Controller\Api\V1;
 use App\Service\GroupService;
 use App\Service\UserGroupService;
 use App\Service\UserService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +30,7 @@ class UserGroupController extends BaseController
      * @Route("/api/v1/user/group/assign", name="api_v1_user_group_assign", methods={"POST"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse|null
+     * @IsGranted("ROLE_ADMIN")
      */
     public function assign(Request $request): ?JsonResponse
     {
@@ -68,6 +70,7 @@ class UserGroupController extends BaseController
      * @Route("/api/v1/user/group/remove", name="api_v1_user_group_remove", methods={"POST"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse|null
+     * @IsGranted("ROLE_ADMIN")
      */
     public function remove(Request $request): ?JsonResponse
     {
