@@ -46,6 +46,10 @@ class UserGroupController extends BaseController
                 return $this->respondWithError('User not found.', [], 404);
             }
 
+            if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+                return $this->respondWithError('Admin can not be assigned to group.', [], 400);
+            }
+
             $group = $this->groupService->findGroupById($group_id);
             if ($group === null) {
                 return $this->respondWithError('Group not found.', [], 404);
