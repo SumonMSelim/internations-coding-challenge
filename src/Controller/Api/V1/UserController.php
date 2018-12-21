@@ -47,7 +47,7 @@ class UserController extends BaseController
                     'roles' => $user->getRoles(),
                 ];
 
-                return $this->respondWithSuccess('User added', ['user' => $response]);
+                return $this->respondWithSuccess('User added', ['user' => $response], 201);
             }
         }
 

@@ -47,7 +47,7 @@ class GroupController extends BaseController
                     'created_at' => $group->getCreatedAt()->format('Y-m-d H:i:s'),
                 ];
 
-                return $this->respondWithSuccess('Group added', ['group' => $response]);
+                return $this->respondWithSuccess('Group added', ['group' => $response], 201);
             }
         }
 

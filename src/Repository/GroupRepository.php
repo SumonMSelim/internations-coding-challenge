@@ -55,14 +55,15 @@ class GroupRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function getUsersCountByGroupId(int $group_id): int
+    public function getUsersCountByGroupId(int $group_id): bool
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('count(user_group.id)');
         $qb->where('user_group.groups = :group_id');
         $qb->from(UserGroup::class, 'user_group');
         $qb->setParameter('group_id', $group_id);
+        $count = (int) $qb->getQuery()->getSingleScalarResult();
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return $count === 0;
     }
 }
