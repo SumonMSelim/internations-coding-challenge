@@ -74,7 +74,7 @@ class UserController extends BaseController
             return $this->respondWithSuccess('User removed.');
         }
 
-        return $this->respondWithError('User not found.', 404);
+        return $this->respondWithError('User not found.', [], 404);
     }
 
     /**
