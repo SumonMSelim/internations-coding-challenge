@@ -65,9 +65,13 @@ class GroupController extends BaseController
         $group = $this->groupService->findGroupById($id);
 
         if ($group) {
-            $this->groupService->deleteGroup($group);
+            if ($this->groupService->checkIfGroupIsEmpty($id) === true) {
+                $this->groupService->deleteGroup($group);
 
-            return $this->respondWithSuccess('Group removed.');
+                return $this->respondWithSuccess('Group removed.');
+            }
+
+            return $this->respondWithError('You can not delete a group having members.', [], 401);
         }
 
         return $this->respondWithError('Group not found.', [], 404);

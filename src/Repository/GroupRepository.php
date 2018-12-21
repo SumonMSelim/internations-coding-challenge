@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Group;
+use App\Entity\UserGroup;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -52,5 +53,16 @@ class GroupRepository extends ServiceEntityRepository
         $this->manager->flush();
 
         return true;
+    }
+
+    public function getUsersCountByGroupId(int $group_id): int
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('count(user_group.id)');
+        $qb->where('user_group.groups = :group_id');
+        $qb->from(UserGroup::class, 'user_group');
+        $qb->setParameter('group_id', $group_id);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -33,4 +33,9 @@ class GroupService
     {
         return $this->groupRepository->delete($group);
     }
+
+    public function checkIfGroupIsEmpty(int $id): bool
+    {
+        return $this->groupRepository->getUsersCountByGroupId($id);
+    }
 }
