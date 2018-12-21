@@ -4,6 +4,7 @@ namespace App\Controller\Api\V1;
 
 use App\Entity\User;
 use App\Service\UserService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,6 +23,7 @@ class UserController extends BaseController
      * @Route("/api/v1/user", name="api_v1_user_create", methods={"POST"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @IsGranted("ROLE_ADMIN")
      */
     public function create(Request $request): JsonResponse
     {
@@ -50,6 +52,29 @@ class UserController extends BaseController
         }
 
         return $validation;
+    }
+
+    /**
+     * @Route("/api/v1/user/{id}", name="api_v1_user_delete", methods={"DELETE"})
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function delete(int $id): JsonResponse
+    {
+        $user = $this->userService->findUserById($id);
+
+        if ($user) {
+            if ($this->getUser()->getId() === $user->getId()) {
+                return $this->respondWithError('You cannot remove yourself.');
+            }
+
+            $this->userService->deleteUser($user);
+
+            return $this->respondWithSuccess('User removed.');
+        }
+
+        return $this->respondWithError('User not found.', 404);
     }
 
     /**

@@ -47,6 +47,16 @@ class UserService
 
     public function createUser(array $inputs): User
     {
-        return $this->userRepository->createUser($inputs);
+        return $this->userRepository->create($inputs);
+    }
+
+    public function findUserById(int $id)
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    public function deleteUser(User $user): bool
+    {
+        return $this->userRepository->delete($user);
     }
 }

@@ -27,16 +27,30 @@ class UserRepository extends ServiceEntityRepository
         $this->manager = $manager;
     }
 
-    public function createUser(array $inputs): User
+    public function create(array $inputs): User
     {
         $user = new User();
         $user->setUsername(strtolower($inputs['username']));
         $password = $this->encoder->encodePassword($user, $inputs['password']);
         $user->setPassword($password);
+        $user->setRoles(['ROLE_USER']);
 
         $this->manager->persist($user);
         $this->manager->flush();
 
         return $user;
+    }
+
+    public function findById(int $id)
+    {
+        return $this->find($id);
+    }
+
+    public function delete(User $user): bool
+    {
+        $this->manager->remove($user);
+        $this->manager->flush();
+
+        return true;
     }
 }
