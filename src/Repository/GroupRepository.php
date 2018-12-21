@@ -40,4 +40,17 @@ class GroupRepository extends ServiceEntityRepository
 
         return $group;
     }
+
+    public function findById(int $id)
+    {
+        return $this->find($id);
+    }
+
+    public function delete(Group $group): bool
+    {
+        $this->manager->remove($group);
+        $this->manager->flush();
+
+        return true;
+    }
 }

@@ -55,6 +55,25 @@ class GroupController extends BaseController
     }
 
     /**
+     * @Route("/api/v1/group/{id}", name="api_v1_group_delete", methods={"DELETE"})
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function delete(int $id): JsonResponse
+    {
+        $group = $this->groupService->findGroupById($id);
+
+        if ($group) {
+            $this->groupService->deleteGroup($group);
+
+            return $this->respondWithSuccess('Group removed.');
+        }
+
+        return $this->respondWithError('Group not found.', [], 404);
+    }
+
+    /**
      * @param array $inputs
      * @return bool|\Symfony\Component\HttpFoundation\JsonResponse
      */

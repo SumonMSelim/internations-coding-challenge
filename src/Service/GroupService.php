@@ -23,4 +23,14 @@ class GroupService
     {
         return $this->groupRepository->create($inputs);
     }
+
+    public function findGroupById(int $id)
+    {
+        return $this->groupRepository->findById($id);
+    }
+
+    public function deleteGroup(Group $group): bool
+    {
+        return $this->groupRepository->delete($group);
+    }
 }
