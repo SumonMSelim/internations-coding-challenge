@@ -44,4 +44,9 @@ class UserService
             return $e;
         }
     }
+
+    public function createUser(array $inputs): User
+    {
+        return $this->userRepository->createUser($inputs);
+    }
 }
